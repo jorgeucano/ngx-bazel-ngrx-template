@@ -1,0 +1,32 @@
+<h1>Todos</h1>
+
+<input placeholder="your todo" [(ngModel)]="todo">
+
+<button
+        (click)="addTodo(todo)"
+        [disabled]="!todo"
+        *ngIf="!editing">
+    Add todo
+</button>
+
+<button
+        (click)="updateTodo(todo)"
+        *ngIf="editing">
+    Update
+</button>
+<button
+        (click)="cancelEdit()"
+        *ngIf="editing">
+    Cancel
+</button>
+
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let todo of todos$ | async; let i = index;">
+        <span [class.done]="todo.done">{{ todo.value }}</span>
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary" (click)="editTodo(todo, i)">Edit</button>
+            <button type="button" class="btn btn-secondary" (click)="toggleDone(todo, i)">Toggle Done</button>
+            <button type="button" class="btn btn-secondary" (click)="deleteTodo(i)">Delete</button>
+        </div>
+    </li>
+</ul>

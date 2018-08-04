@@ -12,6 +12,7 @@ ng_module(
     deps = [
         "//src/hello-world",
         "//src/reducers",
+        "//src/todos",
         "@rxjs",
     ],
 )
