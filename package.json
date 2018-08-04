@@ -36,6 +36,6 @@
         "pree2e": "bazel build test/...",
         "e2e": "yarn e2e-prodserver && yarn e2e-devserver",
         "e2e-prodserver": "concurrently \"bazel run //src:prodserver\" \"while ! nc -z 127.0.0.1 5432; do sleep 1; done && protractor\" --kill-others --success first",
-        "e2e-devserver": "concurrently \"bazel run //src:devserver\" \"while ! nc -z 127.0.0.1 5432; do sleep 1; done && protractor\" --kill-others --success first",
+        "e2e-devserver": "concurrently \"bazel run //src:devserver\" \"while ! nc -z 127.0.0.1 5432; do sleep 1; done && protractor\" --kill-others --success first"
     }
 }
