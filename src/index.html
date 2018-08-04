@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Angular Bazel Example</title>
+    <base href="/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <!-- The Angular application will be bootstrapped into this element. -->
+    <app-component></app-component>
+
+    <!--
+      We load zone.js outside the bundle. That's because it's a "prollyfill"
+      which speculates that such features might be available in a browser.
+      Also it's tricky to configure dead code elimination to understand that
+      zone.js is used, given that we don't have any import statement that
+      imports from it.
+    -->
+    <script src="/zone.min.js"></script>
+
+    <script>
+      function doesFileExist(urlToFile) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', urlToFile, false);
+        xhr.send();
+        return xhr.status != '404';
+      }
+
+      function addScript(src) {
+        var s = document.createElement('script');
+        s.src = src;
+        s.async = false;
+        document.body.appendChild(s);
+      }
+
+      if (doesFileExist('/system.js')) {
+        // prodmode
+        addScript('/system.js');
+        addScript('/bundle.code-split.es5.js');
+      } else {
+        // devmode
+        addScript('/bundle.js');
+      }
+    </script>
+  </body>
+</html>
